@@ -6,4 +6,4 @@
 ## KN und Links
 | # | Thema | Datei |
 |---|-------|-------|
-| 1 | KN01 | [KN01](Kompetenznachweise/KN01/KN01.md) |
+| 1 | MongoDB – Vom Relationalen Denken zum Document-Design | [KN02](Kompetenznachweise/KN02/KN02.md) |
