@@ -1,0 +1,39 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups:
+      - users
+      - sudo
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCPIIO8uY8oWIihDv0tCAbX6toyG1RYkaLZyfGD1L+I07K4CnwAVBSU+81vw3Yv5sN9tj2Ccve9kzEeCNMld2mDP/Tt7edkx2MCToVfVx+njqwY/XbMY9bfdRKJLhIoLavuVNLnnkSIXdtlGr3JF71hPHzBDMEo64ofPCQ8hPsGxL1u3efb12jcWcRhudKtv7Qh6cVE47Zj4xImfi6VlLqwzcKZ5oCqR/z1hLLL+/pS3eM5Qsor5wmAqNfH4+z5eE+pOkFm7a0Nkygv9jwXIqtJzFGKYDe6ciBD04pEovdvY0FTyiv2vksQOVgjtu2faG2Iv1HOG0JktCIwJ49OEgjT teacher-key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj8RVPnGmzHXyMIN5ucZIwbWiWTByhZPEhcvHdboimEXMSKVCVjkJWUc7bN5jUvR9KaRpRcw3TYX4Uongjf0iPLE47Yhr/pyArPMb8SehFtxePttyPCCjSMWgFEbSDnhW37ybfxXmXclNMUOuMuDa5eO354X5oEGqLgrZjf2LlTRBOe4IfY0fQX+efGHemuLp1dheXsQpn8g8NybkBmohFHeyEbS6WkB2AyG1wFqSzV9JptgWDnT00uw3fF0pV4p1ZFsuxzyTgBveiN1MF5dvEyOumhg1Lqzjsx6pt8CAKz60rxNraIZxK6v4K0NbLaOX0Y25L9SamL+x4OWk6bJ7X mert
+      
+ssh_pwauth: false
+disable_root: true
+package_update: true
+packages:
+  - redis-server
+  - python3-venv
+  - python3-pip
+
+write_files:
+  - path: /home/ubuntu/caching/script.py
+    permissions: '0644'
+    content: |
+      # ---------------------------------------------------
+      # KOPIEREN SIE HIER IHR PYTHON-SZENARIO HINEIN.
+      # Achten Sie darauf, dass der Python-Code korrekt
+      # eingerückt ist (mehr als das Wort 'content: |').
+      # ---------------------------------------------------
+
+runcmd:
+  - chown -R ubuntu:ubuntu /home/ubuntu/caching
+  # Redis Server aktivieren und starten
+  - systemctl enable redis-server
+  - systemctl start redis-server
+
+  # Python Virtual Environment vorbereiten
+  - sudo -u ubuntu python3 -m venv /home/ubuntu/caching/.venv
+  - sudo -u ubuntu /home/ubuntu/caching/.venv/bin/pip install redis
