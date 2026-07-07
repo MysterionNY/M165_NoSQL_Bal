@@ -1,0 +1,32 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: shortspulse-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  prometheus:
+    image: prom/prometheus
+    container_name: shortspulse-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - mongo
+
+  grafana:
+    image: grafana/grafana
+    container_name: shortspulse-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  mongo_data:
+  grafana_data:

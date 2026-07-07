@@ -12,3 +12,4 @@
 | 4 | Graphdatenbanken & Vernetzte Daten mit Neo4j | [KN05](Kompetenznachweise/KN05/KN05.md) |
 | 5 | Wide-Column Stores & Query-First Design mit Cassandra | [KN06](Kompetenznachweise/KN06/KN06.md) |
 | 6 | Vektordatenbanken & Semantische Suche mit ChromaDB | [KN07](Kompetenznachweise/KN07/KN07.md) |
+| 7 | Youtube Analytics Auswertung mit Prometheus & Grafana | [ShortsPulse](Kompetenznachweise/ShortsPulse/ShortsPulse.md) |
